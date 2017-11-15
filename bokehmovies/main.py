@@ -9,8 +9,8 @@ from bokeh.layouts import layout, widgetbox
 from bokeh.models import ColumnDataSource, HoverTool, Div
 from bokeh.models.widgets import Slider, Select, TextInput
 from bokeh.io import curdoc
-from bokeh.sampledata.movies_data import movie_path
-
+# from bokeh.sampledata.movies_data import movie_path
+movie_path = './bokehmovies/movies.db'
 conn = sql.connect(movie_path)
 query = open(join(dirname(__file__), 'query.sql')).read()
 movies = psql.read_sql(query, conn)
