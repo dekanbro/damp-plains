@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Innocentive challenge - Colorado river basin data visualization
-# 
+#
 # Dashboard of lower Colorado dam projection (DSET-7)
 # The data are from 4 sites (Davis dam/Lake Mohave and Parker dam/Lake Havasu)
 # and contain projected hourly energy production and water release for a 72 hour period
@@ -13,16 +13,16 @@ import bokeh.plotting as bk
 import bokeh.io
 import bokeh.layouts
 import bokeh.models
-import bokeh.palettes 
+import bokeh.palettes
 
 # Import dataset
-source = "../data/dset-7-data.csv" 
+source = "./locodams/dset-7-data.csv" 
 dat = pd.read_csv(source)
 
 # Parse datetime
 df = dat.assign(DateTime = pd.to_datetime(dat.DateTime))
 
-# # At each site compute time difference from initial time 
+# # At each site compute time difference from initial time
 # # (i.e. time of projecion - initial time) in hours
 # df = (dat
 #         .groupby("Site")
@@ -63,7 +63,7 @@ plots.append(bk.figure(plot_width = 450, plot_height = 300,
 w = pd.Timedelta(0.5, unit="h") # bar width
 elements.append(plots[1].
         vbar(x = dsets[1].DateTime, top = dsets[1].Value, width = w,
-        color = colors[1], alpha = [0. for j in range(n[1])])) 
+        color = colors[1], alpha = [0. for j in range(n[1])]))
 
 # Top right: Lake Havasu - Release
 plots.append(bk.figure(plot_width = 450, plot_height = 125,
@@ -86,7 +86,7 @@ plots.append(bk.figure(plot_width = 450, plot_height = 300,
 w = pd.Timedelta(0.5, unit="h") # bar width
 elements.append(plots[3].
         vbar(x = dsets[3].DateTime, top = dsets[3].Value, width = w,
-        color = colors[3], alpha = [0. for j in range(n[1])])) 
+        color = colors[3], alpha = [0. for j in range(n[1])]))
 
 ds = [e.data_source for e in elements]
 index = 0
@@ -115,7 +115,7 @@ def update(fps = 15):
     if button.label == "Play":
         button.label = "Pause"
         bk.curdoc().add_periodic_callback(animate, 1000/fps)
-    else: 
+    else:
         button.label = "Play"
         bk.curdoc().remove_periodic_callback(animate)
 
@@ -140,4 +140,3 @@ layout = bokeh.layouts.layout([grid, [button, slider]])
 # Add to current document
 bk.curdoc().add_root(layout)
 bk.curdoc().title = "Lower Colorado dams: Projected hourly relase"
-
