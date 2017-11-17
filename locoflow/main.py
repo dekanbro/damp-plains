@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Innocentive challenge - Colorado river basin data visualization
-# 
+#
 # Dashboard of lower Colorado river hourly flow data (incuding YAO stream gages)
 # The data consist of hourly flow rates (in CFS) and hourly river gage readings (in feet)
 # from 9 stream gage sites. These data were compiled from DSET-71 and DSET-13 datasets.
@@ -13,7 +13,7 @@ import bokeh.plotting as bk
 import bokeh.io
 import bokeh.layouts
 import bokeh.models
-import bokeh.palettes 
+import bokeh.palettes
 
 # Import dataset
 source = "./locoflow/loco-flow-hourly-data.csv"
@@ -43,7 +43,7 @@ colors.pop(7)
 plot["points"] = bk.figure(plot_height=500, plot_width=350,
         x_axis_label = "Longitude", y_axis_label = "Latitude")
 
-# Top right: Flow rates 
+# Top right: Flow rates
 plot["tapes"] = bk.figure(plot_height=500, plot_width=600,
                  title = "Hourly flow rates",
                  x_axis_type = "datetime",
@@ -68,8 +68,8 @@ for (j, dset) in enumerate(flow_dsets):
     #d = dset.iloc[:1]
     # Points on map
     points.append(plot["points"]
-            .circle(x = dset.Longitude, y = dset.Latitude, 
-                size = dset.Value/500, color = colors[j], 
+            .circle(x = dset.Longitude, y = dset.Latitude,
+                size = dset.Value/500, color = colors[j],
                 alpha = [0. for k in range(n)]))
     # Tape view of flow
     tapes.append(plot["tapes"]
@@ -81,8 +81,8 @@ for (j, dset) in enumerate(flow_dsets):
 xvals = [d.DateTime for d in height_dsets]
 yvals = [d.Value for d in height_dsets]
 lines = plot["lines"].multi_line(
-        xs = [x[:1] for x in xvals], 
-        ys = [y[:1] for y in yvals], 
+        xs = [x[:1] for x in xvals],
+        ys = [y[:1] for y in yvals],
         line_width = 2, line_color = colors)
 
 elements = dict(points = points, tapes = tapes, lines = lines)
@@ -139,7 +139,7 @@ def update(fps = 12):
     if button.label == "Play":
         button.label = "Pause"
         bk.curdoc().add_periodic_callback(animate, 1000/fps)
-    else: 
+    else:
         button.label = "Play"
         bk.curdoc().remove_periodic_callback(animate)
 
@@ -167,3 +167,4 @@ layout = bokeh.layouts.layout([[button, slider], [plots]])
 bk.curdoc().add_root(layout)
 bk.curdoc().title = "Lower Colorado hourly flow rates"
 
+bk.curdoc().template_variables["intro"] = "this is a test template variable"

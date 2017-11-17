@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title if title else "Bokeh Plot" }}</title>
+
+    {# This line loads the vis.js library for custom model extension to use #}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.min.js"></script>
+
+    {{ bokeh_css }}
+    {{ bokeh_js }}
+    <style>
+      html {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        width: 90%;
+        height: 100%;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1> {{ title }} </h1>
+    <p>
+      {{ intro }}
+    </p>
+    <p>
+    more text more text more text more text more text more text more text more text more text more text more text more text more text more text more text
+    more text more text more text more text more text more text more text more text more text more text more text more text
+    </p>
+    {{ plot_div|indent(8) }}
+    {{ plot_script|indent(8) }}
+    <br />
+    <p style="clear: both;">
+    more text more text more text more text more text more text more text more text more text more text more text more text more text more text more text
+    more text more text more text more text more text more text more text more text more text more text more text more text
+    </p>
+  </body>
+</html>
