@@ -13,6 +13,7 @@ name = "pypi"
 
 bokeh = "==0.12.10"
 pandas = "*"
+"jinja2" = "*"
 
 
 [requires]
